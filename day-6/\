@@ -1,0 +1,27 @@
+use std::fs;
+
+fn main() {
+    let input = match fs::read_to_string("input.txt") {
+        Ok(input) => input,
+        Err(error) => panic!("Failed to read input: {error}"),
+    };
+
+    let parsed: String = input.chars().filter(|char| char.is_alphabetic()).collect();
+
+    let chars: Vec<char> = parsed.chars().collect();
+
+    let mut index = 0;
+
+    loop {
+        let slice = match chars.get(index..index + 4) {
+            Some(slice) => slice,
+            None => {
+                println!("Reached end of list with no match");
+
+                break;
+            }
+        };
+
+        index += 1;
+    }
+}
